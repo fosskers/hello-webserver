@@ -1,0 +1,7 @@
+{
+    "name": "John Johnson",
+    "age": 40,
+    "colour": "Blue",
+    "numbers": [1,2,3,4,5,6,7,8,9,0],
+    "timestamp": "2020-08-07T12:00:00Z"
+}
