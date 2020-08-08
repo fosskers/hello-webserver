@@ -7,7 +7,8 @@ module Main where
 
 import           Data.Aeson (FromJSON, ToJSON, decode', encode)
 import           Data.Text (Text)
-import           Data.Time.Clock (UTCTime)
+import           Data.Time.Calendar (addDays)
+import           Data.Time.Clock (UTCTime(..))
 import           GHC.Generics (Generic)
 import           Network.HTTP.Types
 import           Network.Wai
@@ -49,7 +50,16 @@ handleUser req = case requestMethod req of
     headers = [("Content-Type", "application/json")]
 
 tweakUser :: User -> User
-tweakUser u = u { age = age u + 1 }
+tweakUser u@(User _ a c n t@(UTCTime d _) _) =
+  u { age = a + 1
+    , colour = col
+    , numbers = map (*2) n
+    , timestamp = t { utctDay = addDays 1 d }
+    , missing = Just True }
+  where
+    col = case c of
+      Blue -> Red
+      _    -> col
 
 main :: IO ()
 main = W.run 8080 app
