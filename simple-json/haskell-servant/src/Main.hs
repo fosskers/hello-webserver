@@ -23,13 +23,13 @@ data Colour = Red | Green | Blue
   deriving anyclass (FromJSON, ToJSON)
 
 data User = User
-  { name      :: Text
-  , age       :: Word
-  , profile   :: Text
-  , colour    :: Colour
-  , numbers   :: [Int]
-  , timestamp :: UTCTime
-  , missing   :: Maybe Bool }
+  { name      :: !Text
+  , age       :: !Word
+  , profile   :: !Text
+  , colour    :: !Colour
+  , numbers   :: ![Int]
+  , timestamp :: !UTCTime
+  , missing   :: !(Maybe Bool) }
   deriving stock (Generic)
   deriving anyclass (FromJSON, ToJSON)
 
