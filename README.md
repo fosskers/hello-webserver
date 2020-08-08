@@ -3,7 +3,7 @@
 Basic web server implementations in a variety of languages.
 
 The numbers given below are rough and not hard science. They are meant mostly to
-demonstrate to myself the PROs and CONs are the approaches offered by each
+demonstrate to myself the PROs and CONs of the approaches offered by each
 language / framework.
 
 ## Binary Sizes
