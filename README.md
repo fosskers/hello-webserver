@@ -14,10 +14,8 @@ Final sizes of optimized, stripped release binaries:
 |-------------------|-------------|-------|
 | Haskell (Wai)     | 2.0mb       | 2.5mb |
 | Haskell (Servant) | 2.2mb       | 2.7mb |
-|-------------------|-------------|-------|
 | Rust (Hyper)      | 1.6mb       | 1.7mb |
 | Rust (Warp)       | 1.6mb       | 1.8mb |
-|-------------------|-------------|-------|
 | Go                | 5.2mb       | 5.5mb |
 
 ## Code Length
@@ -29,10 +27,8 @@ included. No attempt at code-golfing to achieve smaller sizes was done.
 |-------------------|-------------|------|
 | Haskell (Wai)     |          13 |   53 |
 | Haskell (Servant) |          13 |   41 |
-|-------------------|-------------|------|
 | Rust (Hyper)      |          18 |   66 |
 | Rust (Warp)       |           6 |   39 |
-|-------------------|-------------|------|
 | Go                |          13 |   53 |
 
 ## Performance
@@ -54,8 +50,6 @@ echo "POST http://127.0.0.1:8080/" | vegeta attack -duration=60s -rate=0 -max-wo
 |-------------------|-------------|
 | Haskell (Wai)     | 5879 (9819) |
 | Haskell (Servant) | 5231 (8966) |
-|-------------------|-------------|
 | Rust (Hyper)      |       15900 |
 | Rust (Warp)       |       15001 |
-|-------------------|-------------|
 | Go                |       11094 |
