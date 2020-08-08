@@ -14,6 +14,7 @@ Final sizes of optimized, stripped release binaries:
 |-------------------|-------------|-------|
 | Haskell (Wai)     | 2.0mb       | 2.5mb |
 | Haskell (Servant) | 2.2mb       | 2.7mb |
+| Haskell (Yesod)   | 3.2mb       | 3.6mb |
 | Rust (Hyper)      | 1.6mb       | 1.7mb |
 | Rust (Warp)       | 1.6mb       | 1.8mb |
 | Go                | 5.2mb       | 5.5mb |
@@ -25,8 +26,9 @@ Final sizes of optimized, stripped release binaries:
 ghc-options:
   $everything: -split-sections
 ```
-- Rust: Upgrading from Hyper to Warp adds around 100 dependencies, and yet most
-  of that weight seems to fade away with `lto = true` and `strip`.
+- Rust: Warp is built on top of Hyper. Upgrading to Warp adds around 100
+  dependencies, and yet most of that weight seems to fade away with `lto = true`
+  and `strip`.
 - Go: Passing `-ldflags="-s -w"` or just running `strip` have the same effect
   and don't compound.
 
@@ -39,11 +41,14 @@ included. No attempt at code-golfing to achieve smaller sizes was done.
 |-------------------|-------------|------|
 | Haskell (Wai)     |          13 |   53 |
 | Haskell (Servant) |          13 |   41 |
+| Haskell (Yesod)   |          12 |   43 |
 | Rust (Hyper)      |          18 |   66 |
 | Rust (Warp)       |           6 |   39 |
 | Go                |          13 |   53 |
 
 ## Performance
+
+Throughput via the JSON server.
 
 The numbers below are rough measurements. The code is idiomatic, and no attempts
 at hand-optimization nor profiling have been done. This should give a fair view
@@ -59,10 +64,14 @@ echo "POST http://127.0.0.1:8080/" | vegeta attack -duration=60s -rate=0 -max-wo
 - Values in parens for Haskell are when `+RTS -A64M -H1G` is given, altering the
   GC behaviour of the runtime.
 
-|                   |  Throughput |
+|                   | Throughput  |
 |-------------------|-------------|
 | Haskell (Wai)     | 5879 (9819) |
 | Haskell (Servant) | 5231 (8966) |
-| Rust (Hyper)      |       15900 |
-| Rust (Warp)       |       15001 |
-| Go                |       11094 |
+| Haskell (Yesod)   | 5370 (7024) |
+| Rust (Hyper)      | 15900       |
+| Rust (Warp)       | 15001       |
+| Go                | 11094       |
+
+- Haskell: By default Yesod prints a lot of log messages to the console, so that
+  probably affected performance.
