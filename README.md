@@ -73,5 +73,7 @@ echo "POST http://127.0.0.1:8080/" | vegeta attack -duration=60s -rate=0 -max-wo
 | Rust (Warp)       | 15001       |
 | Go                | 11094       |
 
+**Notes:**
+
 - Haskell: By default Yesod prints a lot of log messages to the console, so that
   probably affected performance.
