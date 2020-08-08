@@ -42,7 +42,7 @@ tweakUser :: User -> User
 tweakUser u@(User _ a c n t@(UTCTime d _) _) =
   u { age = a + 1
     , colour = col
-    , numbers = map (*2) n
+    , numbers = map (*3) n
     , timestamp = t { utctDay = addDays 1 d }
     , missing = Just True }
   where

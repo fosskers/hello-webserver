@@ -45,7 +45,7 @@ handleUser req = case requestMethod req of
     pure $ case decode' body of
       Nothing   -> responseLBS status400 [] "Unable to parse JSON"
       Just user -> responseLBS status200 headers . encode $ tweakUser user
-  _ -> pure $ responseLBS status404 [] ""
+  _ -> pure $ responseLBS status405 [] ""
   where
     headers = [("Content-Type", "application/json")]
 
@@ -53,7 +53,7 @@ tweakUser :: User -> User
 tweakUser u@(User _ a c n t@(UTCTime d _) _) =
   u { age = a + 1
     , colour = col
-    , numbers = map (*2) n
+    , numbers = map (*3) n
     , timestamp = t { utctDay = addDays 1 d }
     , missing = Just True }
   where
