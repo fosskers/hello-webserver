@@ -18,6 +18,7 @@ Final sizes of optimized, stripped release binaries:
 | Rust (Hyper)      | 1.6mb       | 1.7mb |
 | Rust (Warp)       | 1.6mb       | 1.8mb |
 | Go                | 5.2mb       | 5.5mb |
+| Go (Gin)          | 12mb        | 12mb  |
 
 **Notes:**
 
@@ -45,6 +46,7 @@ included. No attempt at code-golfing to achieve smaller sizes was done.
 | Rust (Hyper)      |          18 |   66 |
 | Rust (Warp)       |           6 |   39 |
 | Go                |          13 |   53 |
+| Go (Gin)          |          10 |   47 |
 
 ## Performance
 
@@ -64,16 +66,19 @@ echo "POST http://127.0.0.1:8080/" | vegeta attack -duration=60s -rate=0 -max-wo
 - Values in parens for Haskell are when `+RTS -A64M -H1G` is given, altering the
   GC behaviour of the runtime.
 
-|                   | Throughput  |
-|-------------------|-------------|
-| Haskell (Wai)     | 5879 (9819) |
-| Haskell (Servant) | 5231 (8966) |
-| Haskell (Yesod)   | 5370 (7024) |
-| Rust (Hyper)      | 15900       |
-| Rust (Warp)       | 15001       |
-| Go                | 11094       |
+|                   |    Throughput |
+|-------------------|---------------|
+| Haskell (Wai)     | 10351 (15142) |
+| Haskell (Servant) |  9438 (13539) |
+| Haskell (Yesod)   |   5422 (6859) |
+| Rust (Hyper)      |         27703 |
+| Rust (Warp)       |         23808 |
+| Go                |         18349 |
+| Go (Gin)          |         18274 |
 
 **Notes:**
 
 - Haskell: By default Yesod prints a lot of log messages to the console, so that
   probably affected performance.
+- Go: Gin code is a bit shorter, but balloons the binary size without offering
+  better performance.
