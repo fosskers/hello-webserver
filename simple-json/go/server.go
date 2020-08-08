@@ -11,6 +11,7 @@ import (
 type User struct {
 	Name      string    `json:"name"`
 	Age       int       `json:"age"`
+	Profile   string    `json:"profile"`
 	Colour    string    `json:"colour"`
 	Numbers   []int     `json:"numbers"`
 	Timestamp time.Time `json:"timestamp"`

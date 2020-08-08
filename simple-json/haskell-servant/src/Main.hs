@@ -25,6 +25,7 @@ data Colour = Red | Green | Blue
 data User = User
   { name      :: Text
   , age       :: Word
+  , profile   :: Text
   , colour    :: Colour
   , numbers   :: [Int]
   , timestamp :: UTCTime
@@ -39,7 +40,7 @@ app :: Application
 app = serve (Proxy :: Proxy API) server
 
 tweakUser :: User -> User
-tweakUser u@(User _ a c n t@(UTCTime d _) _) =
+tweakUser u@(User _ a _ c n t@(UTCTime d _) _) =
   u { age = a + 1
     , colour = col
     , numbers = map (*3) n
