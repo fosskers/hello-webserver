@@ -18,6 +18,18 @@ Final sizes of optimized, stripped release binaries:
 | Rust (Warp)       | 1.6mb       | 1.8mb |
 | Go                | 5.2mb       | 5.5mb |
 
+**Notes:**
+
+- Haskell: The key to small binary sizes is the following in your `stack.yaml`:
+```
+ghc-options:
+  $everything: -split-sections
+```
+- Rust: Upgrading from Hyper to Warp adds around 100 dependencies, and yet most
+  of that weight seems to fade away with `lto = true` and `strip`.
+- Go: Passing `-ldflags="-s -w"` or just running `strip` have the same effect
+  and don't compound.
+
 ## Code Length
 
 All values are "significant lines of code", so blank lines and comments are not
