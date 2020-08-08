@@ -45,8 +45,9 @@ included. No attempt at code-golfing to achieve smaller sizes was done.
 
 ## Performance
 
-The numbers below are rough measurements. No profiling or attempts at
-hand-optimization have been done.
+The numbers below are rough measurements. The code is idiomatic, and no attempts
+at hand-optimization nor profiling have been done. This should give a fair view
+of "off-the-shelf" performance.
 
 All servers were tested with the following command:
 
