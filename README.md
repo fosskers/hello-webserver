@@ -79,6 +79,8 @@ echo "POST http://127.0.0.1:8080/" | vegeta attack -duration=60s -rate=0 -max-wo
 **Notes:**
 
 - Haskell: By default Yesod prints a lot of log messages to the console, so that
-  probably affected performance.
+  probably affected performance. [It isn't
+  clear](https://discourse.haskell.org/t/how-to-disable-logging-per-request-in-yesod/686)
+  how to turn them off.
 - Go: Gin code is a bit shorter, but balloons the binary size without offering
   better performance.
