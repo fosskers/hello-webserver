@@ -1,0 +1,12 @@
+[package]
+name = "rust-tide"
+version = "0.1.0"
+authors = ["Colin Woodbury <colin@fosskers.ca>"]
+edition = "2018"
+
+[dependencies]
+tide = "0.13"
+async-std = { version = "1.6", features = ["attributes"] }
+
+[profile.release]
+lto = true
