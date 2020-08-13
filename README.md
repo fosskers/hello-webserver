@@ -17,7 +17,7 @@ Final sizes of optimized, stripped release binaries:
 | Haskell (Yesod)   | 3.2mb       | 3.6mb |          |
 | Rust (Hyper)      | 1.6mb       | 1.7mb |          |
 | Rust (Warp)       | 1.6mb       | 1.8mb |          |
-| Rust (Tide)       | 1.3mb       |       |          |
+| Rust (Tide)       | 1.3mb       | 1.4mb |          |
 | Go                | 5.2mb       | 5.5mb | 7.8mb    |
 | Go (Gin)          | 12mb        | 12mb  |          |
 
