@@ -10,15 +10,15 @@ language / framework.
 
 Final sizes of optimized, stripped release binaries:
 
-|                   | Hello World | JSON  |
-|-------------------|-------------|-------|
-| Haskell (Wai)     | 2.0mb       | 2.5mb |
-| Haskell (Servant) | 2.2mb       | 2.7mb |
-| Haskell (Yesod)   | 3.2mb       | 3.6mb |
-| Rust (Hyper)      | 1.6mb       | 1.7mb |
-| Rust (Warp)       | 1.6mb       | 1.8mb |
-| Go                | 5.2mb       | 5.5mb |
-| Go (Gin)          | 12mb        | 12mb  |
+|                   | Hello World | JSON  | Database |
+|-------------------|-------------|-------|----------|
+| Haskell (Wai)     | 2.0mb       | 2.5mb | 3.5mb    |
+| Haskell (Servant) | 2.2mb       | 2.7mb |          |
+| Haskell (Yesod)   | 3.2mb       | 3.6mb |          |
+| Rust (Hyper)      | 1.6mb       | 1.7mb |          |
+| Rust (Warp)       | 1.6mb       | 1.8mb |          |
+| Go                | 5.2mb       | 5.5mb | 7.8mb    |
+| Go (Gin)          | 12mb        | 12mb  |          |
 
 **Notes:**
 
