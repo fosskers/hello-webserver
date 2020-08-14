@@ -6,7 +6,7 @@
 
 module Main ( main ) where
 
-import           Data.Aeson (FromJSON, ToJSON, encode)
+import           Data.Aeson (ToJSON, encode)
 import           Data.Maybe (listToMaybe)
 import           Data.Text (Text)
 import           Data.Time.Clock (UTCTime(..))
@@ -20,7 +20,7 @@ import qualified Network.Wai.Handler.Warp as W
 
 data Colour = Red | Green | Blue
   deriving stock (Generic)
-  deriving anyclass (FromJSON, ToJSON)
+  deriving anyclass (ToJSON)
 
 -- An efficient Int-based encoding, but unfortuantely boilerplate.
 instance FromField Colour where
@@ -38,7 +38,7 @@ data User = User
   , timestamp :: !UTCTime
   , missing   :: !(Maybe Bool) }
   deriving stock (Generic)
-  deriving anyclass (FromJSON, ToJSON)
+  deriving anyclass (ToJSON)
 
 -- You'd think this could be auto-derived.
 instance FromRow User where
