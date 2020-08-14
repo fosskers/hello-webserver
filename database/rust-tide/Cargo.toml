@@ -1,0 +1,22 @@
+[package]
+name = "rust-tide"
+version = "0.1.0"
+authors = ["Colin Woodbury <colin@fosskers.ca>"]
+edition = "2018"
+
+[dependencies]
+anyhow = "1.0"
+async-std = { version = "1.6", features = ["attributes"] }
+chrono = { version = "0.4", features = ["serde"] }
+serde = { version = "1.0", features = ["derive"] }
+# sqlx = { version = "0.4.0-beta.1", features = ["sqlite", "chrono"] }
+tide = "0.13"
+
+[dependencies.sqlx]
+version = "0.4.0-beta.1"
+git = "https://github.com/Patryk27/sqlx"
+commit = "3db2e5efd8af4d6d4dc3fab08ffaa52f83198d9b"
+features = ["sqlite", "chrono"]
+
+[profile.release]
+lto = true
