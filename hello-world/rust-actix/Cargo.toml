@@ -1,0 +1,11 @@
+[package]
+name = "rust-actix"
+version = "0.1.0"
+authors = ["Colin Woodbury <colin@fosskers.ca>"]
+edition = "2018"
+
+[dependencies]
+actix-web = "3.0.0-beta.3"
+
+[profile.release]
+lto = true

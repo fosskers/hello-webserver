@@ -18,6 +18,7 @@ Final sizes of optimized, stripped release binaries:
 | Rust (Hyper)      | 1.6mb       | 1.7mb |          |
 | Rust (Warp)       | 1.6mb       | 1.8mb |          |
 | Rust (Tide)       | 1.3mb       | 1.4mb | 1.5mb    |
+| Rust (Actix)      | 3.1mb       |       |          |
 | Go                | 5.2mb       | 5.5mb | 7.8mb    |
 | Go (Gin)          | 12mb        | 12mb  |          |
 
@@ -47,6 +48,7 @@ included. No attempt at code-golfing to achieve smaller sizes was done.
 | Rust (Hyper)      |          18 |   66 |          |
 | Rust (Warp)       |           6 |   39 |          |
 | Rust (Tide)       |           7 |   42 |       69 |
+| Rust (Actix)      |          12 |      |          |
 | Go                |          13 |   53 |       83 |
 | Go (Gin)          |          10 |   47 |          |
 
