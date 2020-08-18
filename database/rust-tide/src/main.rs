@@ -57,8 +57,7 @@ async fn main() -> anyhow::Result<()> {
     app.at("/:name").get(|req: Request<State>| async move {
         let conn = req.state().pool.get()?;
         let name: String = req.param("name")?;
-        // TODO Try `prepare_cached` too.
-        let mut stmt = conn.prepare("SELECT * FROM test WHERE name = ? limit 1")?;
+        let mut stmt = conn.prepare_cached("SELECT * FROM test WHERE name = ? limit 1")?;
         let user = stmt.query_row(params![name], |row| {
             let user = User {
                 name: row.get(0)?,
