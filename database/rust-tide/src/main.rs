@@ -60,12 +60,12 @@ async fn main() -> anyhow::Result<()> {
         let mut stmt = conn.prepare_cached("SELECT * FROM test WHERE name = ? limit 1")?;
         let user = stmt.query_row(params![name], |row| {
             let user = User {
-                name: row.get(0)?,
-                age: row.get(1)?,
-                profile: row.get(2)?,
-                colour: row.get(3)?,
-                timestamp: row.get(4)?,
-                missing: row.get(5)?,
+                name: row.get("name")?,
+                age: row.get("age")?,
+                profile: row.get("profile")?,
+                colour: row.get("colour")?,
+                timestamp: row.get("timestamp")?,
+                missing: row.get("missing")?,
             };
             Ok(user)
         })?;
