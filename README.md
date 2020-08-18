@@ -17,7 +17,7 @@ Final sizes of optimized, stripped release binaries:
 | Haskell (Yesod)   | 3.2mb       | 3.6mb |          |
 | Rust (Hyper)      | 1.6mb       | 1.7mb |          |
 | Rust (Warp)       | 1.6mb       | 1.8mb |          |
-| Rust (Tide)       | 1.3mb       | 1.4mb |          |
+| Rust (Tide)       | 1.3mb       | 1.4mb | 1.5mb    |
 | Go                | 5.2mb       | 5.5mb | 7.8mb    |
 | Go (Gin)          | 12mb        | 12mb  |          |
 
@@ -39,43 +39,41 @@ ghc-options:
 All values are "significant lines of code", so blank lines and comments are not
 included. No attempt at code-golfing to achieve smaller sizes was done.
 
-|                   | Hello World | JSON |
-|-------------------|-------------|------|
-| Haskell (Wai)     |          13 |   53 |
-| Haskell (Servant) |          13 |   41 |
-| Haskell (Yesod)   |          12 |   43 |
-| Rust (Hyper)      |          18 |   66 |
-| Rust (Warp)       |           6 |   39 |
-| Go                |          13 |   53 |
-| Go (Gin)          |          10 |   47 |
+|                   | Hello World | JSON | Database |
+|-------------------|-------------|------|----------|
+| Haskell (Wai)     |          13 |   53 |       49 |
+| Haskell (Servant) |          13 |   41 |          |
+| Haskell (Yesod)   |          12 |   43 |          |
+| Rust (Hyper)      |          18 |   66 |          |
+| Rust (Warp)       |           6 |   39 |          |
+| Rust (Tide)       |           7 |   42 |       69 |
+| Go                |          13 |   53 |       83 |
+| Go (Gin)          |          10 |   47 |          |
 
 ## Performance
 
-Throughput via the JSON server.
+Throughput via the JSON and Database servers.
 
 The numbers below are rough measurements. The code is idiomatic, and no attempts
 at hand-optimization nor profiling have been done. This should give a fair view
 of "off-the-shelf" performance.
 
-All servers were tested with the following command:
-
-```
-echo "POST http://127.0.0.1:8080/" | vegeta attack -duration=60s -rate=0 -max-workers=4 -body=test.json -header="Content-Type: application/json" | vegeta report
-```
+Throughput testing was done with [`vegeta`](https://github.com/tsenart/vegeta).
 
 - Throughput: Higher is better.
 - Values in parens for Haskell are when `+RTS -A64M -H1G` is given, altering the
   GC behaviour of the runtime.
 
-|                   |    Throughput |
-|-------------------|---------------|
-| Haskell (Wai)     | 10351 (15142) |
-| Haskell (Servant) |  9438 (13539) |
-| Haskell (Yesod)   |   5422 (6859) |
-| Rust (Hyper)      |         27703 |
-| Rust (Warp)       |         23808 |
-| Go                |         18349 |
-| Go (Gin)          |         18274 |
+|                   | JSON Throughput | Database Throughput |
+|-------------------|-----------------|---------------------|
+| Haskell (Wai)     |   10351 (15142) |       11187 (12851) |
+| Haskell (Servant) |    9438 (13539) |                     |
+| Haskell (Yesod)   |     5422 (6859) |                     |
+| Rust (Hyper)      |           27703 |                     |
+| Rust (Warp)       |           23808 |                     |
+| Rust (Tide)       |           17032 |               15336 |
+| Go                |           18349 |               13338 |
+| Go (Gin)          |           18274 |                     |
 
 **Notes:**
 
@@ -83,5 +81,7 @@ echo "POST http://127.0.0.1:8080/" | vegeta attack -duration=60s -rate=0 -max-wo
   probably affected performance. [It isn't
   clear](https://discourse.haskell.org/t/how-to-disable-logging-per-request-in-yesod/686)
   how to turn them off.
+- Rust: `rusqlite` holds an internal cache of prepared statements which is free
+  to use with no extra code. Without it, throughput is about equal to Go.
 - Go: Gin code is a bit shorter, but balloons the binary size without offering
-  better performance.
+  better performance. Decoding the timestamp from SQLite must be done by hand.
