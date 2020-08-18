@@ -7,11 +7,10 @@ use serde::Serialize;
 use tide::{Body, Request};
 
 #[derive(Serialize)]
-#[repr(i32)]
 enum Colour {
-    Red = 0,
-    Green = 1,
-    Blue = 2,
+    Red,
+    Green,
+    Blue,
 }
 
 impl FromSql for Colour {
