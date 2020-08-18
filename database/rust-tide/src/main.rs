@@ -2,23 +2,40 @@ use chrono::prelude::*;
 use r2d2::Pool;
 use r2d2_sqlite::SqliteConnectionManager;
 use rusqlite::params;
+use rusqlite::types::{FromSql, FromSqlError, FromSqlResult, ValueRef};
 use serde::Serialize;
 use tide::{Body, Request};
 
-// #[derive(Serialize)]
-// #[repr(i32)]
-// enum Colour {
-//     Red = 0,
-//     Green = 1,
-//     Blue = 2,
-// }
+#[derive(Serialize)]
+#[repr(i32)]
+enum Colour {
+    Red = 0,
+    Green = 1,
+    Blue = 2,
+}
+
+impl FromSql for Colour {
+    fn column_result(value: ValueRef<'_>) -> FromSqlResult<Self> {
+        i64::column_result(value).and_then(|i| {
+            if i == 0 {
+                Ok(Colour::Red)
+            } else if i == 1 {
+                Ok(Colour::Green)
+            } else if i == 2 {
+                Ok(Colour::Blue)
+            } else {
+                Err(FromSqlError::OutOfRange(i))
+            }
+        })
+    }
+}
 
 #[derive(Serialize)]
 struct User {
     name: String,
     age: i32,
     profile: String,
-    // colour: Colour,
+    colour: Colour,
     timestamp: DateTime<Utc>,
     missing: Option<bool>,
 }
@@ -47,6 +64,7 @@ async fn main() -> anyhow::Result<()> {
                 name: row.get(0)?,
                 age: row.get(1)?,
                 profile: row.get(2)?,
+                colour: row.get(3)?,
                 timestamp: row.get(4)?,
                 missing: row.get(5)?,
             };
